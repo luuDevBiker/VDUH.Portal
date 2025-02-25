@@ -7,11 +7,11 @@ docker push 10.166.12.1:5000/mes3portal-vduh
 
 
 
-
 docker stop mes3portal-vduh && docker rm mes3portal-vduh 
 docker rmi 10.166.12.1:5000/mes3portal-vduh:latest
 docker pull 10.166.12.1:5000/mes3portal-vduh
 docker run -d -e HOST=tracuuketqua.vduh.org -e HOST=0.0.0.0 -p 443:443 -p 80:80 --restart=always --name mes3portal-vduh 10.166.12.1:5000/mes3portal-vduh
+docker	 logs -f  mes3portal-vduh
 
 
 ==============================  BE ==============================

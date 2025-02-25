@@ -7,7 +7,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin",
         policy =>
         {
-            policy.WithOrigins("*", "https://tracuuketqua.vduh.org", "http://tracuuketqua.vduh.org", "http://localhost:3001") // Replace with your frontend domain
+            policy.WithOrigins("*", "https://tracuuketqua.vduh.org", "http://tracuuketqua.vduh.org", "http://localhost:3001", "https://localhost:3001") // Replace with your frontend domain
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
