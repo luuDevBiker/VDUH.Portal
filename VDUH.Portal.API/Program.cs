@@ -4,13 +4,8 @@ var allowedOrigins = builder.Configuration.GetSection("CorsSettings:AllowedOrigi
 // Define a CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin",
-        policy =>
-        {
-            policy.WithOrigins("*", "https://tracuuketqua.vduh.org", "http://tracuuketqua.vduh.org", "http://localhost:3001", "https://localhost:3001") // Replace with your frontend domain
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 // Add services to the container.

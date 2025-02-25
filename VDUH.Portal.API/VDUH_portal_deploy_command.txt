@@ -34,6 +34,14 @@ docker run -d  -p 44556:44556 -p 44557:44557 --restart=always --name vduhportala
 docker logs -f  vduhportalapi
 
 
+docker stop vduhportalapi  && docker rm vduhportalapi  
+export  GNUTLS_CPUID_OVERRIDE=0x1
+GNUTLS_CPUID_OVERRIDE=0x1
+git pull
+docker-compose -f docker-compose.override.yml -f docker-compose.yml up -d
+docker logs -f  vduhportalapi
+
+
 docker-compose -f docker-compose-portal-vduh.yml up -d
 
 dotnet dev-certs https -ep ./https/certificate.pfx -p HD9Li7h67y
