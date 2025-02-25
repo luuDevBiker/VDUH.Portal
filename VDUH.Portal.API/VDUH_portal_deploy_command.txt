@@ -1,0 +1,177 @@
+==============================  FE ==============================
+cls
+docker rmi 10.166.12.1:5000/mes3portal-vduh:latest
+docker build --no-cache -t mes3portal-vduh .
+docker tag mes3portal-vduh 10.166.12.1:5000/mes3portal-vduh
+docker push 10.166.12.1:5000/mes3portal-vduh
+
+
+
+
+docker stop mes3portal-vduh && docker rm mes3portal-vduh 
+docker rmi 10.166.12.1:5000/mes3portal-vduh:latest
+docker pull 10.166.12.1:5000/mes3portal-vduh
+docker run -d -e HOST=tracuuketqua.vduh.org -e HOST=0.0.0.0 -p 443:443 -p 80:80 --restart=always --name mes3portal-vduh 10.166.12.1:5000/mes3portal-vduh
+
+
+==============================  BE ==============================
+docker stop $(docker ps -q)\
+docker rm $(docker ps -aq)
+cls
+docker-compose -f docker-compose.override.yml -f docker-compose.yml up -d
+docker tag vduhportalapi 10.166.12.1:5000/vduhportalapi 
+docker push 10.166.12.1:5000/vduhportalapi 
+
+
+
+docker stop vduhportalapi  && docker rm vduhportalapi  
+docker rmi 10.166.12.1:5000/vduhportalapi:latest
+docker pull 10.166.12.1:5000/vduhportalapi
+docker run -d  -p 44557:44557 --restart=always --name vduhportalapi 10.166.12.1:5000/vduhportalapi
+docker logs -f  vduhportalapi
+
+docker run -d  -p 44556:44556 -p 44557:44557 --restart=always --name vduhportalapi 10.166.12.1:5000/vduhportalapi
+docker logs -f  vduhportalapi
+
+
+docker-compose -f docker-compose-portal-vduh.yml up -d
+
+dotnet dev-certs https -ep ./https/certificate.pfx -p HD9Li7h67y
+
+
+export APPDATA=/home/user/.aspnet/https
+docker-compose -f docker-compose-portal-api.yml up -d
+
+
+
+
+
+
+docker stop $(docker ps -q)\
+docker rm $(docker ps -aq)
+cls
+docker-compose -f docker-compose.override.yml -f docker-compose.yml up -d
+docker tag vduhportalapi 192.168.1.199:5000/vduhportalapi 
+docker push 192.168.1.199:5000/vduhportalapi 
+docker logs -f  vduhportalapi
+
+
+clear
+docker stop vduhportalapi  && docker rm vduhportalapi  
+docker rmi 192.168.1.199:5000/vduhportalapi:latest
+docker pull 192.168.1.199:5000/vduhportalapi
+docker run -d  -p 44557:44557 -p 44558:44558 --restart=always --name vduhportalapi 192.168.1.199:5000/vduhportalapi
+clear
+docker logs -f  vduhportalapi
+
+
+
+
+
+clear
+docker stop vduhportalapi  && docker rm vduhportalapi  
+docker rmi 192.168.1.199:5000/vduhportalapi:latest
+docker pull 192.168.1.199:5000/vduhportalapi
+docker-compose -f docker-compose-portal-api.yml up -d
+clear
+docker logs -f  vduhportalapi
+
+
+
+
+
+
+
+
+
+
+
+
+docker run -d \
+    -p 44557:44557 -p 44558:44558 \
+    --restart=always \
+    --name vduhportalapi \
+    -v $(pwd)/certs:/app/certs \
+    -e ASPNETCORE_URLS=https://+:44557;http://+:44558 \
+    -e ASPNETCORE_Kestrel__Certificates__Default__Path=cert.crt \
+    -e ASPNETCORE_Kestrel__Certificates__Default__KeyPath=cert.key \
+
+
+
+http://localhost:44558/api/Searchs/heal
+
+docker stop $(docker ps -q)
+docker rm $(docker ps -aq)
+docker images prune --all
+y
+
+
+
+
+
+
+docker run -d  -p 443:44557 -p 80:44557 --restart=always --name vduhportalapi 192.168.1.199:5000/vduhportalapi
+
+
+
+
+
+services:
+  vduhportalapi:
+    image: 192.168.1.199:5000/vduhportalapi:latest
+    container_name: vduhportalapi
+    restart: always
+    ports:
+      - "44557:44557"
+      - "44558:44558"
+    volumes:
+      - ./https/certificate.pfx:./https/certificate.pfx:rw 
+    environment:
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=../https/certificate.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=HD9Li7h67y
+
+
+
+
+
+
+
+VdUh#1906*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+services:
+  vduhportalapi:
+    image: 192.168.1.199:5000/vduhportalapi:latest
+    container_name: vduhportalapi
+    restart: always
+    ports:
+      - "44557:44557"
+      - "44558:44558"
+    volumes:
+      - ./certs/certificate.pfx:/https/certificate.pfx 
+    environment:
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/certificate.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=HD9Li7h67y
+
+
+
+
+
+

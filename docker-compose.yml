@@ -1,0 +1,6 @@
+services:
+  vduhportalapi:
+    image: ${DOCKER_REGISTRY-}vduhportalapi
+    build:
+      context: .
+      dockerfile: VDUH.Portal.API/Dockerfile
